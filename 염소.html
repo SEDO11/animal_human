@@ -21,7 +21,7 @@
             width: 100%;
             background-color: azure;
             font-family: "NEXON Lv1 Gothic OTF";
-            color: skyblue;
+            /* color: skyblue; */
         }
 
         header {
@@ -139,26 +139,34 @@
                 if (cho !== null) { //이미 하나 선택했는데 또 선택할 경우 
                     alert('다시하려면 초기화를 누르세요.');
                 } else if (e === 1) { //사람을 선택했을 경우
-                    result.innerHTML = "정답입니다."
-                    result.style.color = "green"
-                    human.style.backgroundColor = "green"
+                    trfal(true, human);
                     cho = 1;
                     show(); //초기화 버튼 보이게 하기
-                    video.innerHTML = "영상보러가기";
+                    hide();
                 } else if (e === 2) { //동물을 선택했을 경우
-                    result.innerHTML = "틀렸습니다."
-                    result.style.color = "red"
-                    animal.style.backgroundColor = "rosybrown";
+                    trfal(false, animal);
                     cho = 2;
                     show(); //초기화 버튼 보이게 하기
-                    video.innerHTML = "영상보러가기";
+                    hide();
                 }
             } else {
                 alert('소리를 듣지 않고 선택할 수 없습니다.');
             }
         }
 
-        function play(e) { //오디오
+        function trfal(e, back) { //참, 거짓 구분해서 배경 색칠
+            if(e) {
+                result.innerHTML = "정답입니다."
+                result.style.color = "green"
+                back.style.backgroundColor = "green"
+            } else {
+                result.innerHTML = "틀렸습니다."
+                result.style.color = "red"
+                back.style.backgroundColor = "rosybrown";
+            }
+        }
+
+        function play() { //오디오
             var audio = new Audio('염소.mp3');
             audio.volume = 0.4; //볼륨 조절
             audio.play();
@@ -166,26 +174,31 @@
             replay.innerHTML = "다시 듣기";
             playstart = true;
         }
-
-        function win(e) { //새창에서 영상보기
-            window.open("https://" + e, "", "left=500,top=500,width=600,height=400");
+        
+        function win(url) { //새창에서 영상보기
+            window.open("https://" + url, "", "left=500,top=500,width=600,height=400");
         }
 
         function show() { //초기화, 영상보러가는 버튼 보이게만들기
             document.getElementById("reset").style.display = "inline-block";
             document.getElementById("videolink").style.display = "inline-block";
+            document.getElementById("sound").style.display = "none";
+        }
+
+        function hide() { //소리버튼 감추기
+            document.getElementById("sound").style.display = "none";
         }
 
     </script>
 </head>
 
-<body id="back">
+<body id="backBody">
     <header>
         <h1>염소인가 사람인가?</h1>
     </header>
-    <nav>
-    </nav>
     <section>
+        <button id="videolink" style="display: none;"
+            onclick="win('www.youtube.com/watch?v=EA0DPBLJnzc&t=20s&ab_channel=RitualPainter')">영상보기</button>
         <button id="sound" onclick="play()">소리 듣기</button>
         <button id="reset" style="display: none;" onclick="window.location.reload()">초기화</button>
         <p id="result"></p>
@@ -201,8 +214,6 @@
         </article>
     </section>
     <footer>
-        <button id="videolink" style="display: none;"
-            onclick="win('www.youtube.com/watch?v=EA0DPBLJnzc&t=20s&ab_channel=RitualPainter')">영상보러가기</button>
     </footer>
 </body>
 
