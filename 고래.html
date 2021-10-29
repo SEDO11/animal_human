@@ -129,13 +129,13 @@
     </style>
     <script>
         var cho = null;
-        var playstart = 0;
+        var playstart = false;
         function choice(e) {
             var result = document.getElementById("result");
             var human = document.getElementById("human");
             var animal = document.getElementById("animal");
             var video = document.getElementById("videolink");
-            if (playstart === 1) {
+            if (playstart) {
                 if (cho !== null) { //이미 하나 선택했는데 또 선택할 경우 
                     alert('다시하려면 초기화를 누르세요.');
                 } else if (e === 1) { //사람을 선택했을 경우
@@ -162,7 +162,9 @@
             var audio = new Audio('고래.mp3');
             audio.volume = 0.4; //볼륨 조절
             audio.play();
-            playstart = 1;
+            var replay = document.getElementById("sound");
+            replay.innerHTML = "다시 듣기";
+            playstart = true;
         }
 
         function win(e) { //새창에서 영상보기
@@ -184,7 +186,7 @@
     <nav>
     </nav>
     <section>
-        <button onclick="play()">소리 듣기</button>
+        <button id="sound" onclick="play()">소리 듣기</button>
         <button id="reset" style="display: none;" onclick="window.location.reload()">초기화</button>
         <p id="result"></p>
         <article id="human">
