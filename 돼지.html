@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>돼지</title>
+    <link rel="stylesheet" href="font.css">
     <style>
         #result {
             font-weight: bold;
@@ -233,7 +234,7 @@
         }
 
         function play() { //오디오
-            var audio = new Audio('돼지.mp3');
+            var audio = new Audio('소리/돼지.mp3');
             audio.volume = 0.4; //볼륨 조절
             audio.play();
             var replay = document.getElementById("sound");
@@ -270,13 +271,13 @@
         <p id="result"></p>
         <article id="human">
             <h2>사람</h2>
-            <img src="사람.jpg" alt="">
+            <img src="사진/사람.jpg" alt="">
             <p class="chocnt" id="huCnt"></p>
             <button class="btnselect" onclick="choice(false, human)">선택</button>
         </article>
         <article id="animal">
             <h2>돼지</h2>
-            <img src="돼지.jpg" alt="">
+            <img src="사진/돼지.jpg" alt="">
             <p class="chocnt" id="goCnt"></p>
             <button class="btnselect" onclick="choice(true, animal)">선택</button>
         </article>
