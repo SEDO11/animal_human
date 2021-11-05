@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>염소</title>
+    <title>고양이</title>
     <style>
         #result {
             font-weight: bold;
             font-size: 30px;
         }
 
-        .chocnt { /*사람 염소 선택 폰트 크기*/
+        .chocnt { /*사람 고양이 선택 폰트 크기*/
             font-size: 20px;
         }
 
@@ -163,61 +163,61 @@
         }
 
         function animalCnt() { //동물 누른횟수 카운트 저장
-            var count = localStorage.getItem("goat");
+            var count = localStorage.getItem("cat");
             if(count === null) { // 로컬스토리지가 없을경우 
-                localStorage.setItem("goat", "0"); // 키에 값을 다시 넣어서 시작
-                var start = localStorage.getItem("goat");
+                localStorage.setItem("cat", "0"); // 키에 값을 다시 넣어서 시작
+                var start = localStorage.getItem("cat");
                 var countNum = parseInt(start);
-                localStorage.setItem("goat", ++countNum); //0에서 1추가
+                localStorage.setItem("cat", ++countNum); //0에서 1추가
             } else { // 로컬스토리지가 있을 경우
                 var countNum = parseInt(count); 
-                localStorage.setItem("goat", ++countNum); //기존값에서 1 추가
+                localStorage.setItem("cat", ++countNum); //기존값에서 1 추가
             }
         }
 
         function animalCntPrint() { //동물 카운트 값 출력
             var cnt = document.getElementById("goCnt");
-            var count = localStorage.getItem("goat");
+            var count = localStorage.getItem("cat");
             if(count === null) { // 로컬스토리지가 없을경우 
-                localStorage.setItem("goat", "0"); // 다시 만들어서 카운트 시작
-                count = localStorage.getItem("goat");
+                localStorage.setItem("cat", "0"); // 다시 만들어서 카운트 시작
+                count = localStorage.getItem("cat");
             }
             cnt.innerHTML = "선택: " + count + " 명";
         }
 
         function humanCnt() { //사람 누른횟수 카운트 저장
-            var count = localStorage.getItem("human1");
+            var count = localStorage.getItem("human5");
             if(count === null) { // 로컬스토리지가 없을경우 
-                localStorage.setItem("human1", "0"); // 다시 만들어서 카운트 시작
-                var start = localStorage.getItem("human1");
+                localStorage.setItem("human5", "0"); // 다시 만들어서 카운트 시작
+                var start = localStorage.getItem("human5");
                 var countNum = parseInt(start);
-                localStorage.setItem("human1", ++countNum);  //0에서 1추가
+                localStorage.setItem("human5", ++countNum);  //0에서 1추가
             } else { // 로컬스토리지가 있을 경우
                 var countNum = parseInt(count);
-                localStorage.setItem("human1", ++countNum); //기존값에서 1 추가
+                localStorage.setItem("human5", ++countNum); //기존값에서 1 추가
             }
         }
 
         function humanCntPrint() { //사람 카운트 값 출력
             var cnt = document.getElementById("huCnt");
-            var count = localStorage.getItem("human1");
+            var count = localStorage.getItem("human5");
             if(count === null) { // 로컬스토리지가 없을경우 
-                localStorage.setItem("human1", "0"); // 다시 만들어서 카운트 시작
-                count = localStorage.getItem("human1");
+                localStorage.setItem("human5", "0"); // 다시 만들어서 카운트 시작
+                count = localStorage.getItem("human5");
             }
             cnt.innerHTML = "선택: " + count + " 명";
         }
 
         function totalCnt() { //총 누른 횟수 카운트
             var cho = document.getElementById("choAll");
-            var count1 = localStorage.getItem("goat");
-            var count2 = localStorage.getItem("human1");
-            localStorage.setItem("total1", "0");
+            var count1 = localStorage.getItem("cat");
+            var count2 = localStorage.getItem("human5");
+            localStorage.setItem("total5", "0");
             var countNum1 = parseInt(count1);
             var countNum2 = parseInt(count2);
             var result = countNum1 + countNum2;
             cho.innerHTML = "이 게임을 진행한 사람: " + result + " 명";
-            localStorage.setItem("total1", result);
+            localStorage.setItem("total5", result);
         }
 
         function trfal(e, back) { //참, 거짓 구분해서 배경 색칠
@@ -233,7 +233,7 @@
         }
 
         function play() { //오디오
-            var audio = new Audio('염소.mp3');
+            var audio = new Audio('고양이.mp3');
             audio.volume = 0.4; //볼륨 조절
             audio.play();
             var replay = document.getElementById("sound");
@@ -259,7 +259,7 @@
 
 <body id="backBody">
     <header>
-        <h1>염소인가 사람인가?</h1>
+        <h1>고양이인가 사람인가?</h1>
     </header>
     <section>
         <button id="videolink" style="display: none;"
@@ -275,8 +275,8 @@
             <button class="btnselect" onclick="choice(true, human)">선택</button>
         </article>
         <article id="animal">
-            <h2>염소</h2>
-            <img src="염소.jpg" alt="">
+            <h2>고양이</h2>
+            <img src="고양이.jpg" alt="">
             <p class="chocnt" id="goCnt"></p>
             <button class="btnselect" onclick="choice(false, animal)">선택</button>
         </article>

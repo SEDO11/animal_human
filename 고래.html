@@ -12,6 +12,10 @@
             font-size: 30px;
         }
 
+        .chocnt { /*사람 고래 선택 폰트 크기*/
+            font-size: 20px;
+        }
+
         /* 태그 */
         html,
         body {
@@ -20,7 +24,7 @@
             height: 100%;
             width: 100%;
             background-color: azure;
-            color: skyblue;
+            color: blue;
             font-family: "NEXON Lv1 Gothic OTF";
             /* color: skyblue; */
         }
@@ -70,7 +74,6 @@
         h2 {
             padding: 10px;
             text-align: center;
-            color: skyblue;
         }
 
         a {
@@ -94,7 +97,7 @@
             width: 70%;
         }
 
-        .btnselect {
+        .btnselect { /*버튼 크기*/
             margin: 0 10px 0 10px;
             width: 100px;
             font-size: 20px;
@@ -132,37 +135,97 @@
         var cho = null;
         var playstart = false;
 
-        function choice(e) {
+        function choice(bool, select) { //선택 동작, 실행
             var result = document.getElementById("result");
-            var human = document.getElementById("human");
-            var animal = document.getElementById("animal");
             var video = document.getElementById("videolink");
-
             if (playstart) {
                 if (cho !== null) { //이미 하나 선택했는데 또 선택할 경우 
                     alert('다시하려면 초기화를 누르세요.');
-                } else if (e === 1) { //사람을 선택했을 경우
-                    trfal(true, human);
+                } else if (bool === true) { //참을 선택했을 경우
+                    trfal(bool, select);
                     cho = 1;
-                    show(); //초기화 버튼 보이게 하기
-                    hide();
-                } else if (e === 2) { //동물을 선택했을 경우
-                    trfal(false, animal);
+                    show(); //초기화, 영상 버튼 보이게 하기
+                    hide(); //소리버튼 감추기
+                    humanCnt(); //누른횟수 카운트
+                } else if (bool === false) { //거짓을 선택했을 경우
+                    trfal(bool, select);
                     cho = 2;
-                    show(); //초기화 버튼 보이게 하기
-                    hide();
+                    show(); //초기화, 영상 버튼 보이게 하기
+                    hide(); //소리버튼 감추기
+                    animalCnt(); //누른횟수 카운트
                 }
+                animalCntPrint(); //동물 카운트 출력
+                humanCntPrint(); //사람 카운트 출력
+                totalCnt(); //총합 카운트 출력
             } else {
                 alert('소리를 듣지 않고 선택할 수 없습니다.');
             }
         }
 
+        function animalCnt() { //동물 누른횟수 카운트 저장
+            var count = localStorage.getItem("whale");
+            if(count === null) { // 로컬스토리지가 없을경우 
+                localStorage.setItem("whale", "0"); // 키에 값을 다시 넣어서 시작
+                var start = localStorage.getItem("whale");
+                var countNum = parseInt(start);
+                localStorage.setItem("whale", ++countNum); //0에서 1추가
+            } else { // 로컬스토리지가 있을 경우
+                var countNum = parseInt(count); 
+                localStorage.setItem("whale", ++countNum); //기존값에서 1 추가
+            }
+        }
+
+        function animalCntPrint() { //동물 카운트 값 출력
+            var cnt = document.getElementById("goCnt");
+            var count = localStorage.getItem("whale");
+            if(count === null) { // 로컬스토리지가 없을경우 
+                localStorage.setItem("whale", "0"); // 다시 만들어서 카운트 시작
+                count = localStorage.getItem("whale");
+            }
+            cnt.innerHTML = "선택: " + count + " 명";
+        }
+
+        function humanCnt() { //사람 누른횟수 카운트 저장
+            var count = localStorage.getItem("human2");
+            if(count === null) { // 로컬스토리지가 없을경우 
+                localStorage.setItem("human2", "0"); // 다시 만들어서 카운트 시작
+                var start = localStorage.getItem("human2");
+                var countNum = parseInt(start);
+                localStorage.setItem("human2", ++countNum);  //0에서 1추가
+            } else { // 로컬스토리지가 있을 경우
+                var countNum = parseInt(count);
+                localStorage.setItem("human2", ++countNum); //기존값에서 1 추가
+            }
+        }
+
+        function humanCntPrint() { //사람 카운트 값 출력
+            var cnt = document.getElementById("huCnt");
+            var count = localStorage.getItem("human2");
+            if(count === null) { // 로컬스토리지가 없을경우 
+                localStorage.setItem("human2", "0"); // 다시 만들어서 카운트 시작
+                count = localStorage.getItem("human2");
+            }
+            cnt.innerHTML = "선택: " + count + " 명";
+        }
+
+        function totalCnt() { //총 누른 횟수 카운트 저장 및 출력
+            var cho = document.getElementById("choAll");
+            var count1 = localStorage.getItem("whale");
+            var count2 = localStorage.getItem("human2");
+            localStorage.setItem("total2", "0");
+            var countNum1 = parseInt(count1);
+            var countNum2 = parseInt(count2);
+            var result = countNum1 + countNum2;
+            cho.innerHTML = "이 게임을 진행한 사람: " + result + " 명";
+            localStorage.setItem("total2", result);
+        }
+
         function trfal(e, back) { //참, 거짓 구분해서 배경 색칠
-            if(e) {
+            if(e) { //맞을 경우
                 result.innerHTML = "정답입니다."
                 result.style.color = "green"
                 back.style.backgroundColor = "green"
-            } else {
+            } else { //틀릴 경우
                 result.innerHTML = "틀렸습니다."
                 result.style.color = "red"
                 back.style.backgroundColor = "rosybrown";
@@ -177,7 +240,7 @@
             replay.innerHTML = "다시 듣기";
             playstart = true;
         }
-
+        
         function win(url) { //새창에서 영상보기
             window.open("https://" + url, "", "left=500,top=500,width=600,height=400");
         }
@@ -185,12 +248,12 @@
         function show() { //초기화, 영상보러가는 버튼 보이게만들기
             document.getElementById("reset").style.display = "inline-block";
             document.getElementById("videolink").style.display = "inline-block";
+            document.getElementById("sound").style.display = "none";
         }
 
         function hide() { //소리버튼 감추기
             document.getElementById("sound").style.display = "none";
         }
-
     </script>
 </head>
 
@@ -201,18 +264,21 @@
     <section>
         <button id="videolink" style="display: none;"
             onclick="win('www.youtube.com/watch?v=5Oe66Q8HgTc&ab_channel=Jimund')">영상보기</button>
-        <button id="sound" style="display: inline-block;" onclick="play()">소리 듣기</button>
+        <button id="sound" onclick="play()">소리 듣기</button>
         <button id="reset" style="display: none;" onclick="window.location.reload()">초기화</button>
+        <p class="chocnt" id="choAll"></p>
         <p id="result"></p>
         <article id="human">
             <h2>사람</h2>
             <img src="사람.jpg" alt="">
-            <button class="btnselect" onclick="choice(1)">선택</button>
+            <p class="chocnt" id="huCnt"></p>
+            <button class="btnselect" onclick="choice(true, human)">선택</button>
         </article>
         <article id="animal">
             <h2>고래</h2>
             <img src="고래.jpg" alt="">
-            <button class="btnselect" onclick="choice(2)">선택</button>
+            <p class="chocnt" id="goCnt"></p>
+            <button class="btnselect" onclick="choice(false, animal)">선택</button>
         </article>
     </section>
     <footer>
