@@ -9,7 +9,7 @@ body{
     font-family: 'WandohopeB';
 }
 
-@media (max-width:800px) {
+@media (min-width:420px) and (max-width:800px) { /*태블릿 화면*/
     
     body{
         margin: 0;
@@ -17,10 +17,6 @@ body{
 
     #menu ul li{
         margin-bottom: 10px;
-    }
-
-    #menu .menu_link {
-        text-align: center;
     }
 
     article{
@@ -37,4 +33,35 @@ body{
         padding: 0 0 10px 0;
     }
 
+}
+
+@media (max-width:420px) { /*스마트폰 화면*/
+
+    body{
+        margin: 0;
+    }
+
+    #menu ul li{
+        margin-left: 20%;
+        margin-right: 20%;
+        margin-bottom: 10px;
+    }
+
+    #menu .menu_link {
+        width: 100px;
+    }
+
+    article{
+        padding: 5px;
+    }
+
+    article#human{
+        width: 100%;
+        padding: 0 0 10px 0;
+    }
+
+    article#animal{
+        width: 100%;
+        padding: 0 0 10px 0;
+    }
 }
