@@ -15,9 +15,14 @@ body{
         margin: 0;
     }
 
-    /* nav{
-        height: 30%;
-    } */
+    #menu ul li{
+        margin-bottom: 10px;
+    }
+
+
+    #menu .menu_link {
+        text-align: center;
+    }
 
     article{
         padding: 5px;
