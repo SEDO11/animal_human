@@ -20,7 +20,7 @@
         #menu .menu_link {
             text-decoration: none;
             display: block;
-            width: 200px;
+            width: 300px;
             height: auto;
             font-size: 25px;
         }
@@ -86,33 +86,6 @@
             color: blue;
         }
     </style>
-    <script>
-        //글자 색 변경
-        var i = 0;
-        function TextChange() {
-            var back = document.getElementById("backBody");
-            if (i===0) {
-                back.style.backgroundColor = "black";
-                i++;
-            } else if (i===1) {
-                back.style.backgroundColor = "brown";
-                i++;
-            }  else if (i===2) {
-                back.style.backgroundColor = "white";
-                i++;
-            }  else if (i > 4) {
-                i = 0;
-            } else {
-
-            }
-        }
-
-        // 배경화면 색 변경
-        function backChange(color) {
-            var textColor = color;
-            document.getElementById("backBody").style.backgroundColor = textColor;
-        }
-    </script>
 </head>
 <body>
     <header>
