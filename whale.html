@@ -231,7 +231,7 @@
         }
 
         function play() { //오디오
-            var audio = new Audio('소리/고래.mp3');
+            var audio = new Audio('sound/고래.mp3');
             audio.volume = 0.4; //볼륨 조절
             audio.play();
             var replay = document.getElementById("sound");
@@ -267,13 +267,13 @@
         <p id="result"></p>
         <article id="human">
             <h2>사람</h2>
-            <img src="사진/사람.jpg" alt="">
+            <img src="picture/사람.jpg" alt="">
             <p class="chocnt" id="huCnt"></p>
             <button class="btnselect" onclick="choice(true, human)">선택</button>
         </article>
         <article id="animal">
             <h2>고래</h2>
-            <img src="사진/고래.jpg" alt="">
+            <img src="picture/고래.jpg" alt="">
             <p class="chocnt" id="goCnt"></p>
             <button class="btnselect" onclick="choice(false, animal)">선택</button>
         </article>
